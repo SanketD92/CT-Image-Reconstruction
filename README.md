@@ -8,18 +8,18 @@ The X-ray projection of the object at each angle of the CT gantry rotation produ
 I've created a sample sinogram and the goal of this project is to construct its corresponding phantom object. We'll be determining the X-ray attenuation through the different layers within the phantom and thereby get object density profile for the object. 
 
 <p align="center">
-<img src="Assets/Phantom.png" width="425"/>
-</p>
-- This sinogram is the input
-
-<p align="center">
 <img src="/Assets/Phantom_Sinogram.jpg" width="425"/>
 </p>
-  - This phantom 2D image *should* be the output
-  
+  - The sinogram above is the input
+
+<p align="center">
+<img src="Assets/Phantom.png" width="425"/>
+</p>
+- The phantom 2D image above *should* be the output
+
 ## Zeroth Moment
 <p align="center">
-<img src="Assets/Moment_0.png" width="425"/>
+<img src="Assets/Moment_zero.jpg" width="425"/>
 </p>
 
 The 0th moment, as shown in the figure above is the response of the CT detectors when X-rays first hit them at each angle. This would be the sum of attenuation amplitude (Y axis) at each angle (X axis) and therefore will be the sum of each of the 256 angular projected columns of the sinogram. 
@@ -32,7 +32,7 @@ A simple back-projection is computed by overlaying projections on top of each ot
 We therefore select one column at a time, smear the attenuation magnitude information over 128 rows and then rotate it to the angle which corresponds to in degrees (256th projection corresponds to 180 degrees, so nth projection will correspond to n*180/256 degrees). 
 
 <p align="center">
-<img src="Assets/Simple_Backprojected.png" width="425"/>
+<img src="Assets/SimpleBackprojected.jpg" width="425"/>
 </p>
 
 > Not close enough to the real output image, but certainly a step closer!
@@ -49,7 +49,7 @@ To get the original frequency distribution, we inverse-Fourier-shift and then in
 </p>
 
 <p align="center">
-<img src="Assets/Filtered_Sinogram.png" width="425"/>
+<img src="/Assets/Filtered_Sinogram.jpg" width="425"/>
 <img src="/Assets/Filtered_Backprojected.jpg" width="425"/>
 </p>
 
@@ -83,14 +83,14 @@ ylabel('Position')
 
 Using MATLAB's built-in iradon function:
 <p align="center">
-<img src="Assets/IRadon_Ram-Lak.png" width="425"/>
+<img src="Assets/IRadon_Ram-Lak.jpg" width="425"/>
 </p>
-* This image is generated using the Ram-Lak filter
+* Above image is generated using the Ram-Lak filter
 
 <p align="center">
 <img src="/Assets/Iradon_Hamming.jpg" width="425"/>
 </p>
-  * This image is generated using the Hamming filter
+  * Above image is generated using the Hamming filter
   
 >Ram-Lak filter being a high pass filter as compared to the mid-frequency pass Hamming filter, we see the Ram-Lak filtered image has sharper features than the Hamming filtered image. So to have better sharpness and better resolution on medical images, Ram-Lak filter would be the better fit.
 
