@@ -7,8 +7,8 @@ The X-ray projection of the object at each angle of the CT gantry rotation produ
 
 For the following project, I've created a sample sinogram and  are required to construct its corresponding phantom object and determining the X-ray attenuation and possibly the object density throughout the object. 
 
-![screenshot](<img src="github.com/SanketD92/CT-Image-Reconstruction/blob/master/Assets/Phantom.png" width="425"/> )
-![screenshot](<img src="https://github.com/SanketD92/CT-Image-Reconstruction/blob/master/Assets/Phantom_Sinogram.jpg" width="425"/> )
+![screenshot](<img src="Assets/Phantom.png" width="425"/> )
+![screenshot](<img src="Assets/Phantom_Sinogram.jpg" width="425"/> )
 
 You can also:
   - Import and save files from GitHub, Dropbox, Google Drive and One Drive
