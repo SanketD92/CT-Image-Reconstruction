@@ -78,7 +78,7 @@ ylabel('Position')
 
 Ram-Lak Filtered Output             |  Hamming Filtered Output
 :-------------------------:|:-------------------------:
-![](/Assets/IRadon_Ram-Lak.jpg)  |  ![](Assets/Iradon_Hamming.png)
+![](/Assets/IRadon_Ram-Lak.jpg)  |  ![](Assets/Iradon_Hamming.jpg)
 
 Ram-Lak filter being a high pass filter as compared to the mid-frequency pass Hamming filter, we see the Ram-Lak filtered image has sharper features than the Hamming filtered image. So to have better sharpness and better resolution on medical images, Ram-Lak filter would be the better fit.
 
