@@ -15,7 +15,7 @@ I've created a sample sinogram and the goal of this project is to construct its 
 <p align="center">
 <img src="/Assets/Phantom_Sinogram.jpg" width="425"/>
 </p>
-  - The phantom 2D image on the left *should* be the output
+  - This phantom 2D image *should* be the output
   
 ## Zeroth Moment
 <p align="center">
