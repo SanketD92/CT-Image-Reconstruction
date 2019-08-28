@@ -40,13 +40,13 @@ For carrying out filtered back-projection of the sinogram, we need to construct 
 
 To get the original frequency distribution, we inverse-Fourier-shift and then inverse-Fourier-transform it to later get the spatial domain sinogram. We see how the filter response is far more selective than the non-fitlered couterpartand we can see there are amplitude spikes when an edge is detected.
 
-<p align="center">
-<img src="Assets/Filtered_vs_Original_Sinogram_45deg.png" width="425"/>
-</p>
-
-Filtered Sinogram             |  Filtered Back-projection
+Filtered Sinogram             |  Filtered vs Original
 :-------------------------:|:-------------------------:
-![](/Assets/Filtered_Sinogram.jpg)  |  ![](Assets/Filtered_Backprojected.png)
+![](/Assets/Filtered_Sinogram.jpg)  |  ![](Assets/Filtered_vs_Original_Sinogram_45deg.png)
+
+<p align="center">
+<img src="Assets/Filtered_Backprojected.jpg" width="425"/>
+</p>
 
 > As compared to our simple back-projected image, we see that the Ram-Lak filter has been able to remove low frequency noise (haze), improve contrast, thereby improving the total signal-to-noise ratio. The resolution also seems to have increased but mainly due to the increased sharpness and improved contrast.
 
