@@ -5,44 +5,91 @@ Computed tomography is a collection of X-ray images stacked together in order to
 ## Project Details
 The X-ray projection of the object at each angle of the CT gantry rotation produces a sinogram where the Y axis shows the angle in degrees while the X axis shows the spatial distance. 
 
-For the following project, I've created a sample sinogram and  are required to construct its corresponding phantom object and determining the X-ray attenuation and possibly the object density throughout the object. 
+I've created a sample sinogram and the goal of this project is to construct its corresponding phantom object. We'll be determining the X-ray attenuation through the different layers within the phantom and thereby get object density profile for the object. 
 
-<img src="Assets/Phantom.png" width="425"/>
-<img src="/Assets/Phantom_Sinogram.jpg" width="425"/>
+<p align="center">
+<img align="left" src="Assets/Phantom.png" width="425"/>
+<img align="right" src="/Assets/Phantom_Sinogram.jpg" width="425"/>
+</p>
 
-You can also:
-  - Import and save files from GitHub, Dropbox, Google Drive and One Drive
-  - Drag and drop markdown and HTML files into Dillinger
-  - Export documents as Markdown, HTML and PDF
+  - The sinogram on the right is the input
+  - The phantom 2D image on the left *should* be the output
+  
+## Zeroth Moment
+<p align="center">
+<img src="Assets/Moment_0.png" width="425"/>
+</p>
 
-Markdown is a lightweight markup language based on the formatting conventions that people naturally use in email.  As [John Gruber] writes on the [Markdown site][df1]
+The 0th moment, as shown in the figure above is the response of the CT detectors when X-rays first hit them at each angle. This would be the sum of attenuation amplitude (Y axis) at each angle (X axis) and therefore will be the sum of each of the 256 angular projected columns of the sinogram. 
 
-> The overriding design goal for Markdown's
-> formatting syntax is to make it as readable
-> as possible. The idea is that a
-> Markdown-formatted document should be
-> publishable as-is, as plain text, without
-> looking like it's been marked up with tags
-> or formatting instructions.
+>The striking result of it being a flat line is because no matter which angle the projection is being taken from, the sum of the attenuation intensity will be constant since the object features are static.
 
-This text you see here is *actually* written in Markdown! To get a feel for Markdown's syntax, type some text into the left window and watch the results in the right.
+## Simple Back-Projected Image
+A simple back-projection is computed by overlaying projections on top of each other which create a concentration gradient for all the components of the image. A single column will contain the attenuation information for a single angular projection. There are 256 angular projections in total which correspond to the 180 degree shown on the sinogram. 
 
-## Result for some test images
+We therefore select one column at a time, smear the attenuation magnitude information over 128 rows and then rotate it to the angle which corresponds to in degrees (256th projection corresponds to 180 degrees, so nth projection will correspond to n*180/256 degrees). 
 
-Dillinger uses a number of open source projects to work properly:
+<p align="center">
+<img src="Assets/Simple_Backprojected.png" width="425"/>
+</p>
 
-* [AngularJS] - HTML enhanced for web apps!
-* [Ace Editor] - awesome web-based text editor
-* [markdown-it] - Markdown parser done right. Fast and easy to extend.
-* [Twitter Bootstrap] - great UI boilerplate for modern web apps
-* [node.js] - evented I/O for the backend
-* [Express] - fast node.js network app framework [@tjholowaychuk]
-* [Gulp] - the streaming build system
-* [Breakdance](http://breakdance.io) - HTML to Markdown converter
-* [jQuery] - duh
+> Not close enough to the real output image, but certainly a step closer!
 
-And of course Dillinger itself is open source with a [public repository][dill]
- on GitHub.
+The specific ‘greyness’ is added again and again every time a new projection smear is added to the old one. This makes the dark spots to show relatively dark and the light spots will show relatively light on the back-projected image.
+
+## The Ram-Lak Filter
+For carrying out filtered back-projection of the sinogram, we need to construct the filter that we will be using in frequency domain. This will help us easily multiply it to the Fourier transformed sinogram instead of performing convolution. The filter response is then multiplied with a Fourier transformed (and shifted) sinogram. The result to this is a Ram-Lak (high-pass filter) filtered sinogram, in frequency domain and all zero frequencies centered. 
+
+To get the original frequency distribution, we inverse-Fourier-shift and then inverse-Fourier-transform it to later get the spatial domain sinogram. We see how the filter response is far more selective than the non-fitlered couterpartand we can see there are amplitude spikes when an edge is detected.
+
+<p align="center">
+<img src="Assets/Filtered_vs_Original_Sinogram_45deg.png" width="425"/>
+</p>
+
+<p align="center">
+<img align="left" src="Assets/Filtered_Sinogram.png" width="425"/>
+<img align="right" src="/Assets/Filtered_Backprojected.jpg" width="425"/>
+</p>
+
+> As compared to our simple back-projected image, we see that the Ram-Lak filter has been able to remove low frequency noise (haze), improve contrast, thereby improving the total signal-to-noise ratio. The resolution also seems to have increased but mainly due to the increased sharpness and improved contrast.
+
+## Compare to Hamming
+
+Yes, MATLAB has inbuilt functions to compute Radon and inverse Radon transforms.
+
+```matlab
+theta=0:180;                    
+[R,rad_angles]=radon(phantom,theta);    % as shown in radon help file
+
+imagesc(rad_angles,theta,R'); colormap('gray');  
+title('Sinogram Generated Using radon Function')
+xlabel('Position')
+ylabel('Angle')
+
+RamLak_filtered=iradon(R, theta, 'linear','Ram-Lak', 1.0, size(phantom,1));
+imagesc(RamLak_filtered); colormap('gray');  
+title('Filtered Backprojection Using iradon Function and Ram-Lak Filter')
+xlabel('Position')
+ylabel('Position')
+
+Hamming_filtered=iradon(R, theta, 'linear','Hamming', 1.0, size(phantom,1));
+imagesc(Hamming_filtered); colormap('gray');
+title('Filtered Backprojection Using iradon Function and Hamming Filter')
+xlabel('Position')
+ylabel('Position')
+```
+
+Using MATLAB's built-in iradon function:
+  * The image on the left is generated using the Ram-Lak filter
+  * The image on the right is generated using the Hamming filter
+
+<p align="center">
+<img align="left" src="Assets/IRadon_Ram-Lak.png" width="425"/>
+<img align="right" src="/Assets/Iradon_Hamming.jpg" width="425"/>
+</p>
+  
+>Ram-Lak filter being a high pass filter as compared to the mid-frequency pass Hamming filter, we see the Ram-Lak filtered image has sharper features than the Hamming filtered image. So to have better sharpness and better resolution on medical images, Ram-Lak filter would be the better fit.
+
 
 ## Have fun
 

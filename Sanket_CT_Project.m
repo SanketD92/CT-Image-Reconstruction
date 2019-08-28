@@ -178,7 +178,7 @@ myFilter = repmat(myFilter,1,256);  %to make sure sinogram and filter are of sam
 %   BACKPROJECT THE FILTERED SINOGRAMS
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
- disp('Question D, part 2: Filtered backprojection')
+ disp('part 2: Filtered backprojection')
 if 1~=exist('bpf_recon')  % Just checking ... 
 %  
   bpf_recon = zeros(nx,ny);
@@ -240,7 +240,7 @@ figure(8)
 %
 %  Subsample the original sinogram by removing 7 out of 8 projections   
     sinogram8 = sinogram(:,1:8:end); 
-%  Using the result of Question C, reconstruct the image
+%  Using the original Sinogram, reconstruct the image
    sinogram8_filtered=fftshift(fft(sinogram8));
    
    %Constructing Ram-Lak filter
