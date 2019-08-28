@@ -24,6 +24,7 @@ I've created a sample sinogram and the goal of this project is to construct its 
 
 The 0th moment, as shown in the figure above is the response of the CT detectors when X-rays first hit them at each angle. This would be the sum of attenuation amplitude (Y axis) at each angle (X axis) and therefore will be the sum of each of the 256 angular projected columns of the sinogram. 
 
+
 >The striking result of it being a flat line is because no matter which angle the projection is being taken from, the sum of the attenuation intensity will be constant since the object features are static.
 
 ## Simple Back-Projected Image
@@ -36,7 +37,6 @@ We therefore select one column at a time, smear the attenuation magnitude inform
 </p>
 
 > Not close enough to the real output image, but certainly a step closer!
-
 The specific ‘greyness’ is added again and again every time a new projection smear is added to the old one. This makes the dark spots to show relatively dark and the light spots will show relatively light on the back-projected image.
 
 ## The Ram-Lak Filter
@@ -57,7 +57,7 @@ To get the original frequency distribution, we inverse-Fourier-shift and then in
 
 ## Compare to Hamming
 
-Yes, MATLAB has inbuilt functions to compute Radon and inverse Radon transforms.
+Lets also explore MATLAB's inbuilt functions to do this. We use the Radon and inverse Radon transforms for this purpose.
 
 ```matlab
 theta=0:180;                    
@@ -85,12 +85,12 @@ Using MATLAB's built-in iradon function:
 <p align="center">
 <img src="Assets/IRadon_Ram-Lak.jpg" width="425"/>
 </p>
-* Above image is generated using the Ram-Lak filter
+- Above image is generated using the Ram-Lak filter
 
 <p align="center">
 <img src="/Assets/Iradon_Hamming.jpg" width="425"/>
 </p>
-  * Above image is generated using the Hamming filter
+  - Above image is generated using the Hamming filter
   
 >Ram-Lak filter being a high pass filter as compared to the mid-frequency pass Hamming filter, we see the Ram-Lak filtered image has sharper features than the Hamming filtered image. So to have better sharpness and better resolution on medical images, Ram-Lak filter would be the better fit.
 
