@@ -7,15 +7,11 @@ The X-ray projection of the object at each angle of the CT gantry rotation produ
 
 I've created a sample sinogram and the goal of this project is to construct its corresponding phantom object. We'll be determining the X-ray attenuation through the different layers within the phantom and thereby get object density profile for the object. 
 
-<p align="center">
-<img src="/Assets/Phantom_Sinogram.jpg" width="425"/>
-</p>
-  - The sinogram above is the input
 
-<p align="center">
-<img src="Assets/Phantom.png" width="425"/>
-</p>
-- The phantom 2D image above *should* be the output
+Input Sinogram             |  Output should be close to
+:-------------------------:|:-------------------------:
+![](/Assets/Phantom_Sinogram.jpg)  |  ![](Assets/Phantom.png)
+
 
 ## Zeroth Moment
 <p align="center">
@@ -48,10 +44,9 @@ To get the original frequency distribution, we inverse-Fourier-shift and then in
 <img src="Assets/Filtered_vs_Original_Sinogram_45deg.png" width="425"/>
 </p>
 
-<p align="center">
-<img src="/Assets/Filtered_Sinogram.jpg" width="425"/>
-<img src="/Assets/Filtered_Backprojected.jpg" width="425"/>
-</p>
+Filtered Sinogram             |  Filtered Back-projection
+:-------------------------:|:-------------------------:
+![](/Assets/Filtered_Sinogram.jpg)  |  ![](Assets/Filtered_Backprojected.png)
 
 > As compared to our simple back-projected image, we see that the Ram-Lak filter has been able to remove low frequency noise (haze), improve contrast, thereby improving the total signal-to-noise ratio. The resolution also seems to have increased but mainly due to the increased sharpness and improved contrast.
 
@@ -81,18 +76,11 @@ xlabel('Position')
 ylabel('Position')
 ```
 
-Using MATLAB's built-in iradon function:
-<p align="center">
-<img src="Assets/IRadon_Ram-Lak.jpg" width="425"/>
-</p>
-- Above image is generated using the Ram-Lak filter
+Ram-Lak Filtered Output             |  Hamming Filtered Output
+:-------------------------:|:-------------------------:
+![](/Assets/IRadon_Ram-Lak.jpg)  |  ![](Assets/Iradon_Hamming.png)
 
-<p align="center">
-<img src="/Assets/Iradon_Hamming.jpg" width="425"/>
-</p>
-  - Above image is generated using the Hamming filter
-  
->Ram-Lak filter being a high pass filter as compared to the mid-frequency pass Hamming filter, we see the Ram-Lak filtered image has sharper features than the Hamming filtered image. So to have better sharpness and better resolution on medical images, Ram-Lak filter would be the better fit.
+Ram-Lak filter being a high pass filter as compared to the mid-frequency pass Hamming filter, we see the Ram-Lak filtered image has sharper features than the Hamming filtered image. So to have better sharpness and better resolution on medical images, Ram-Lak filter would be the better fit.
 
 
 ## Have fun
