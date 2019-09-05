@@ -1,6 +1,8 @@
 # Computed Tomography Image Reconstruction
 ## Introduction
-Computed tomography is a collection of X-ray images stacked together in order to get the depth information as the third dimension of a diagnostic image. These "stacked" X-ray images are received as a sinogram from the CT gantry, and represent the X-ray absorption profile of a single layer of the subject. The objective of this project was to re-construct the original 2D image of this single layer and also distinguish between different X-ray absorption levels by the subject's tissues using light attenuation information. Below we see an example of how a sinogram (right) is formed by passing X-ray beams through a cross sectional layer of the body (left), with the X-ray absorption from each angle generating a graph of attenuation profile.
+Computed tomography is a collection of X-ray images stacked together in order to get the depth information as the third dimension of a diagnostic image. These "stacked" X-ray images are received as a sinogram from the CT gantry, and represent the X-ray absorption profile of a single layer of the subject. The objective of this project was to re-construct the original 2D image of this single layer and also distinguish between different X-ray absorption levels by the subject's tissues using light attenuation information. 
+
+Below we see an example of how a sinogram (right) is formed by passing X-ray beams through a cross sectional layer of the body (left), with the X-ray absorption from each angle generating a graph of attenuation profile.
 
 <p align="center">
 <img src="Assets/CT-Sinogram_Formation.gif" width="625"/>
