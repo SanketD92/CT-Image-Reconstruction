@@ -5,7 +5,7 @@ Computed tomography is a collection of X-ray images stacked together in order to
 Below we see an example of how a sinogram (right) is formed by passing X-ray beams through a cross sectional layer of the body (left), with the X-ray absorption from each angle generating a graph of attenuation profile.
 
 <p align="center">
-<img src="Assets/CT-Sinogram_Formation.gif" width="625"/>
+<img src="assets/CT-Sinogram_Formation.gif" width="625"/>
 </p>
 
 ## Project Details
@@ -16,12 +16,12 @@ I've created a sample sinogram and the goal of this project is to construct its 
 
 Input Sinogram             |  Output should be close to
 :-------------------------:|:-------------------------:
-![](/Assets/Phantom_Sinogram.jpg)  |  ![](Assets/Phantom.png)
+![](/assets/Phantom_Sinogram.jpg)  |  ![](assets/Phantom.png)
 
 
 ## Zeroth Moment
 <p align="center">
-<img src="Assets/Moment_zero.jpg" width="425"/>
+<img src="assets/Moment_zero.jpg" width="425"/>
 </p>
 
 The 0th moment, as shown in the figure above is the response of the CT detectors when X-rays first hit them at each angle. This would be the sum of attenuation amplitude (Y axis) at each angle (X axis) and therefore will be the sum of each of the 256 angular projected columns of the sinogram. 
@@ -35,7 +35,7 @@ A simple back-projection is computed by overlaying projections on top of each ot
 We therefore select one column at a time, smear the attenuation magnitude information over 128 rows and then rotate it to the angle which corresponds to in degrees (256th projection corresponds to 180 degrees, so nth projection will correspond to n*180/256 degrees). 
 
 <p align="center">
-<img src="Assets/SimpleBackprojected.jpg" width="425"/>
+<img src="assets/SimpleBackprojected.jpg" width="425"/>
 </p>
 
 > Not close enough to the real output image, but certainly a step closer!
@@ -48,10 +48,10 @@ To get the original frequency distribution, we inverse-Fourier-shift and then in
 
 Filtered Sinogram             |  Filtered vs Original
 :-------------------------:|:-------------------------:
-![](/Assets/Filtered_Sinogram.jpg)  |  ![](Assets/Filtered_vs_Original_Sinogram_45deg.png)
+![](/assets/Filtered_Sinogram.jpg)  |  ![](assets/Filtered_vs_Original_Sinogram_45deg.png)
 
 <p align="center">
-<img src="Assets/Filtered_Backprojected.jpg" width="425"/>
+<img src="assets/Filtered_Backprojected.jpg" width="425"/>
 </p>
 
 > As compared to our simple back-projected image, we see that the Ram-Lak filter has been able to remove low frequency noise (haze), improve contrast, thereby improving the total signal-to-noise ratio. The resolution also seems to have increased but mainly due to the increased sharpness and improved contrast.
@@ -84,7 +84,7 @@ ylabel('Position')
 
 Ram-Lak Filtered Output             |  Hamming Filtered Output
 :-------------------------:|:-------------------------:
-![](/Assets/IRadon_Ram-Lak.jpg)  |  ![](Assets/Iradon_Hamming.jpg)
+![](/assets/IRadon_Ram-Lak.jpg)  |  ![](assets/Iradon_Hamming.jpg)
 
 Ram-Lak filter being a high pass filter as compared to the mid-frequency pass Hamming filter, we see the Ram-Lak filtered image has sharper features than the Hamming filtered image. So to have better sharpness and better resolution on medical images, Ram-Lak filter would be the better fit.
 
